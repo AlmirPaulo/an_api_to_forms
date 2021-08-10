@@ -2,6 +2,9 @@
 An API to Forms. Yeah, I could not come out with a better name... Sorry. I hope it serves you, anyway. 
 This API can works as a backend to your forms. It's perfect for static pages.
 
+## Features
+By now the only feature is email sending.
+
 ## How to use it
 
 1. Clone this repository
@@ -12,6 +15,11 @@ This API can works as a backend to your forms. It's perfect for static pages.
 
 4. Code your form and paste the url of your deployed server to the action attribute, like this:
 ...
+
+## Plans for the future
+
+- [ ] Authentication handling
+- [ ] Collecting data forms 
 
 ## F.A.Q.
 
