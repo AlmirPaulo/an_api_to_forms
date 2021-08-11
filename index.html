@@ -6,13 +6,13 @@
 </head>
 <body>
   <h1>Form de teste</h1>
-  <form method="POST" action="http://localhost:5000/email">
+  <form action="http://localhost:8000/email" method="POST" >
     <div>
     <input type="text" name="email" placeholder="Email" required>
     <input type="text" name="subject" placeholder="Subject" required>
     </div>
     <textarea id="" name="text" cols="30" rows="10" required></textarea>
-    <button>Send</button>
+    <button formmethod="POST"  type="submit" formaction="http://localhost:8000/email">Send</button>
   </form>
 </body>
 </html>

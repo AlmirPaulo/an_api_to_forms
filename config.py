@@ -1,18 +1,22 @@
-URL = 'http://localhost:8000'
+from pathlib import Path
+
+BASE_DIR = Path('.')
+
+URL = 'http://localhost:8000/'
 
 METHOD = 'POST' #POST, GET, PUT, etc...
 
-DATA = {'a':[1], 'b':[2] 'c':[3]}
+DATA = {}
 
 # directly from Flask-Mail documentation. 
 # https://pythonhosted.org/Flask-Mail/
-MAIL_SERVER = ... #default ‘localhost’
-MAIL_PORT = ... #default 25
-MAIL_USE_TLS = ... # default False
-MAIL_USE_SSL = ... #default False
-MAIL_USERNAME = ...
-MAIL_PASSWORD = ...
-MAIL_DEFAULT_SENDER = ...
-MAIL_MAX_EMAILS = ...
-MAIL_ASCII_ATTACHMENTS = ... #default False
+MAIL_SERVER = 'smtp-relay.gmail.com'
+MAIL_PORT = 25
+MAIL_USE_TLS = True
+MAIL_USE_SSL = False
+MAIL_USERNAME = 'ap.freelas@gmail.com'
+MAIL_PASSWORD = open('../passwords', 'r').read()
+MAIL_DEFAULT_SENDER = 'ap.freelas@gmail.com'
+MAIL_MAX_EMAILS = None
+MAIL_ASCII_ATTACHMENTS = False
 
