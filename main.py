@@ -1,18 +1,25 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from flask_mail import Mail, Message
-import logging, config, pdb
+import logging, config
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(module)s:%(levelname)s:%(message)s')
 
 app = Flask(__name__, template_folder='.')
 mail = Mail()
 
+#Tests endpoint. Comment it out when in production.
 @app.route('/form')
 def tests():
     logging.debug('hit')
     return render_template('index.html')
 
+#In case you need.
+@app.route('/ping')
+def ping():
+    return 'pong'
+
+#Feature in development
 # @app.route('/')
 # def endpoint():
 #     if request.method == config.METHOD and request.url_root == config.URL:
@@ -23,20 +30,26 @@ def tests():
         
 @app.route('/email', methods=['POST'])
 def email():
-    if request.method == config.METHOD and request.url_root == config.URL:
+    if request.method == config.METHOD and request.headers['Referer'] == config.HOMEPAGE:
+
         #Getting data
         email = request.form.get('email')
         subject = request.form.get('subject')
         text = request.form.get('text')
+
         #Sending email
-        msg = Message(text)
+        msg = Message(f'{subject} - {email}')
+        msg.body = text
         msg.recipients = [config.MAIL_DEFAULT_SENDER]
         mail.send(msg)
-        logging.debug('email sent')
+        
+        logging.info('email sent')
+
+        return redirect(config.HOMEPAGE)
 
 
     else:
-        logging.debug(request.url_root)
+        logging.warning(request.headers['Referer'])
         return "I'm sorry, I can't help you."
 
 
@@ -62,5 +75,7 @@ app.config['MAIL_ASCII_ATTACHMENTS'] = config.MAIL_ASCII_ATTACHMENTS
 mail.init_app(app) 
 
 
+if __name__=='__main__':
+    app.run(debug=True)
 
 

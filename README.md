@@ -7,14 +7,29 @@ By now the only feature is email sending.
 
 ## How to use it
 
-1. Clone this repository
+1. Clone this repository.
 
 2. Set the right values on the **config.py** variables.
 
 3. Deploy it.
 
 4. Code your form and paste the url of your deployed server to the action attribute, like this:
-...
+
+        <form action="yourwebserveraddress.domain" method="POST">
+            ...
+        </form>
+
+## The Email Sending Feature
+
+Use the */email* endpoint and code your form more or less like this:
+
+        <form action="yourwebserveraddress.domain/email" method="POST">
+            <input type="text" name="subject" placeholder="Subject" required>
+            <input type="text" name="email" placeholder="Email" required>
+            <textarea name="text" cols="30" rows="10" required></textarea>
+            <button type="submit" onclick="alert(Email sent!)">Send</button>
+        </form>
+The important part is the *name values*, the *method* and the *action url*. All the rest is just suggestions.
 
 ## Plans for the future
 
@@ -36,3 +51,7 @@ You probably can hide this in the server using environment variables. Another go
 Open an Issue please.
 
 ## Contribute
+## Release
+### 0.0.1 - August 11, 2021
+
+First Release
