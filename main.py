@@ -36,16 +36,18 @@ def email():
         email = request.form.get('email')
         subject = request.form.get('subject')
         text = request.form.get('text')
+        if len(email) > 255 or len(subject) > 255 or len(text) > 1000:
+            return 'Message, email or subject too long'
+        else:
+            #Sending email
+            msg = Message(f'{subject} - {email}')
+            msg.body = text
+            msg.recipients = [config.MAIL_DEFAULT_SENDER]
+            mail.send(msg)
 
-        #Sending email
-        msg = Message(f'{subject} - {email}')
-        msg.body = text
-        msg.recipients = [config.MAIL_DEFAULT_SENDER]
-        mail.send(msg)
-        
-        logging.info('email sent')
+            logging.info('email sent')
 
-        return redirect(config.HOMEPAGE)
+            return redirect(config.HOMEPAGE)
 
 
     else:
